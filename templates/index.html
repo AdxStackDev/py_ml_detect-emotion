@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Detector</h1>
+        <p>Upload an image of a face to detect the emotion.</p>
+        <form id="upload-form">
+            <input type="file" id="file-input" name="file" accept="image/*">
+            <button type="submit">Detect Emotion</button>
+        </form>
+        <div id="result"></div>
+        <div id="image-preview"></div>
+    </div>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const resultDiv = document.getElementById('result');
+            const imagePreview = document.getElementById('image-preview');
+
+            if (!file) {
+                resultDiv.innerHTML = 'Please select a file.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Display image preview
+            imagePreview.innerHTML = ''; // Clear previous preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                imagePreview.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+
+            resultDiv.innerHTML = 'Detecting...';
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.emotion) {
+                        resultDiv.innerHTML = `Predicted Emotion: <strong>${data.emotion}</strong>`;
+                    } else if (data.error) {
+                        resultDiv.innerHTML = `Error: ${data.error}`;
+                    } else {
+                        resultDiv.innerHTML = 'An unknown error occurred.';
+                    }
+                } else {
+                    resultDiv.innerHTML = 'Error communicating with the server.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = 'An error occurred while uploading the file.';
+            }
+        });
+    </script>
+</body>
+</html>
