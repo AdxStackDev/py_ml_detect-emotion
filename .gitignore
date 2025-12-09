@@ -117,6 +117,9 @@ yarn-error.log*
 docs/_build/
 site/
 
+# Documentation folder (except README.md)
+documentations/
+
 # Backup files
 *.backup
 *~
