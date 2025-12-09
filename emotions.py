@@ -71,5 +71,5 @@ for epoch in range(EPOCHS):
         running_loss += loss.item()
     print(f"Epoch {epoch+1}/{EPOCHS}, Loss: {running_loss:.4f}")
 
-torch.save(model.state_dict(), "sad_happy_angry1.pth")
+torch.save(model.state_dict(), "sad_happy_angry.pth")
 print("Model saved as sad_happy_angry.pth")

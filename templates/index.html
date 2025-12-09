@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection AI - Advanced Image Analysis</title>
+    <meta name="description" content="Advanced AI-powered emotion detection system with batch processing capabilities">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                        <circle cx="8.5" cy="10.5" r="1.5" />
+                        <circle cx="15.5" cy="10.5" r="1.5" />
+                        <path d="M12 17.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>Emotion Detection AI</h1>
+                    <p>Advanced Neural Network Analysis</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Model Accuracy</span>
+                    <span class="stat-value">94.2%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Processing Speed</span>
+                    <span class="stat-value">&lt;100ms</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-card">
+                <div class="upload-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                </div>
+                <h2>Upload Images for Analysis</h2>
+                <p>Support for single or batch image processing. Drag & drop or click to select.</p>
+
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" multiple accept="image/*" hidden>
+                    <div class="upload-content">
+                        <div class="upload-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                                <polyline points="9 15 12 12 15 15" />
+                                <line x1="12" y1="12" x2="12" y2="21" />
+                            </svg>
+                        </div>
+                        <p class="upload-text">Drag & drop images here</p>
+                        <p class="upload-subtext">or</p>
+                        <button class="btn-browse" id="browseBtn">Browse Files</button>
+                        <p class="upload-info">Supports: JPG, PNG, GIF • Max size: 16MB per file</p>
+                    </div>
+                </div>
+
+                <div class="selected-files" id="selectedFiles"></div>
+
+                <button class="btn-process" id="processBtn" disabled>
+                    <span class="btn-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </span>
+                    Process Images
+                </button>
+            </div>
+        </section>
+
+        <!-- Processing Indicator -->
+        <div class="processing-overlay" id="processingOverlay">
+            <div class="processing-card">
+                <div class="spinner"></div>
+                <h3>Analyzing Images...</h3>
+                <p id="processingStatus">Processing 0 of 0 images</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <h2>Analysis Results</h2>
+                <div class="results-actions">
+                    <button class="btn-secondary" id="clearBtn">Clear All</button>
+                    <button class="btn-secondary" id="newAnalysisBtn">New Analysis</button>
+                </div>
+            </div>
+
+            <div class="results-grid" id="resultsGrid"></div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

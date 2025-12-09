@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Emotion Detection App – Cyberpunk Report</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                    },
+                    colors: {
+                        neonPink: '#ff2cdf',
+                        neonCyan: '#48e5ff',
+                        neonPurple: '#8b5cf6',
+                        neonYellow: '#facc15',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 25px rgba(72,229,255,0.6)',
+                    },
+                    backgroundImage: {
+                        'cyber-grid':
+                            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 44, 223, 0.35), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(72, 229, 255, 0.35), transparent 55%),
+                #020617;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-gray-100 antialiased">
+
+    <!-- Overlay grid for subtle sci‑fi feel -->
+    <div class="pointer-events-none fixed inset-0 bg-cyber-grid bg-[size:40px_40px] opacity-40"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-6 md:py-10 space-y-6">
+
+        <!-- Header -->
+        <header class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 rounded-full border border-neonCyan/40 bg-black/60 px-3 py-1 text-xs tracking-wide uppercase">
+                    <span class="h-2 w-2 rounded-full bg-neonCyan animate-pulse"></span>
+                    <span class="text-neonCyan font-semibold">Analysis Report</span>
+                </div>
+                <h1 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+                    Emotion Detection App – <span class="text-neonPink">Cyberpunk Briefing</span>
+                </h1>
+                <p class="mt-1 text-sm text-gray-400 max-w-prose">
+                    PyTorch‑based CNN that reads grayscale faces and classifies them into <span
+                        class="text-neonYellow">angry</span>,
+                    <span class="text-neonYellow">happy</span>, or <span class="text-neonYellow">sad</span>. Optimized
+                    for quick experimentation and education.
+                </p>
+            </div>
+
+            <!-- Right header: badges -->
+            <div class="flex flex-col items-end gap-2 text-xs">
+                <div class="flex gap-2">
+                    <span
+                        class="inline-flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 border border-neonPink/50">
+                        <span class="h-1.5 w-1.5 rounded-full bg-neonPink animate-ping"></span>
+                        <span>CNN • PyTorch</span>
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 border border-neonCyan/40">
+                        <span class="h-1.5 w-1.5 rounded-full bg-neonCyan"></span>
+                        <span>3 Emotions</span>
+                    </span>
+                </div>
+                <span class="text-gray-500 font-mono">Dataset: 2,278 images • Model: ~4.8&nbsp;MB</span>
+            </div>
+        </header>
+
+        <!-- Main grid -->
+        <div class="grid gap-6 lg:grid-cols-3">
+            <!-- Left column: Overview + Project structure -->
+            <div class="space-y-6 lg:col-span-2">
+
+                <!-- Overview card -->
+                <section
+                    class="relative rounded-2xl border border-neonCyan/30 bg-black/70 backdrop-blur-xl p-4 md:p-6 shadow-neon">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-neonPink to-transparent">
+                    </div>
+                    <header class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold flex items-center gap-2">
+                            <span class="text-neonPink text-xl">📊</span>
+                            Overview
+                        </h2>
+                        <span class="text-[10px] uppercase tracking-wide text-gray-400">Emotion Detection App</span>
+                    </header>
+
+                    <p class="text-sm text-gray-300">
+                        This system uses a custom Convolutional Neural Network to classify 48×48 grayscale facial images
+                        into three emotion classes:
+                        <span class="text-neonYellow font-semibold">angry</span>,
+                        <span class="text-neonYellow font-semibold">happy</span>, and
+                        <span class="text-neonYellow font-semibold">sad</span>.
+                    </p>
+                    <p class="mt-2 text-sm text-gray-400">
+                        The model is lightweight (~1.18M parameters, ~4.8&nbsp;MB weights) and designed for fast
+                        training and real‑time inference,
+                        making it suitable for demos, education, and small‑scale deployments.
+                    </p>
+
+                    <!-- Quick metrics pills -->
+                    <div class="mt-4 grid gap-3 sm:grid-cols-3 text-xs">
+                        <div class="rounded-xl border border-neonPink/40 bg-black/70 px-3 py-2">
+                            <div class="text-[10px] uppercase tracking-wide text-gray-400">Classes</div>
+                            <div class="mt-1 font-mono text-sm text-neonPink">3</div>
+                            <div class="mt-1 text-[11px] text-gray-400">Angry, Happy, Sad</div>
+                        </div>
+                        <div class="rounded-xl border border-neonCyan/40 bg-black/70 px-3 py-2">
+                            <div class="text-[10px] uppercase tracking-wide text-gray-400">Dataset Size</div>
+                            <div class="mt-1 font-mono text-sm text-neonCyan">2,278</div>
+                            <div class="mt-1 text-[11px] text-gray-400">Augmented grayscale images</div>
+                        </div>
+                        <div class="rounded-xl border border-neonPurple/40 bg-black/70 px-3 py-2">
+                            <div class="text-[10px] uppercase tracking-wide text-gray-400">Expected Accuracy</div>
+                            <div class="mt-1 font-mono text-sm text-neonPurple">60–75%</div>
+                            <div class="mt-1 text-[11px] text-gray-400">3‑class, limited data</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Project structure -->
+                <section
+                    class="relative rounded-2xl border border-neonPurple/40 bg-black/70 backdrop-blur-xl p-4 md:p-6">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-lg font-semibold flex items-center gap-2">
+                            <span class="text-neonPurple text-xl">📁</span>
+                            Project Structure
+                        </h2>
+                        <span class="text-[10px] uppercase tracking-wide text-gray-400">Repository Layout</span>
+                    </header>
+
+                    <div
+                        class="font-mono text-[11px] leading-relaxed text-gray-200 bg-black/70 rounded-xl border border-gray-700/60 px-3 py-3 overflow-auto">
+                        detectEmotions/<br>
+                        ├── <span class="text-neonCyan">emotion_dataset/</span> # Training dataset<br>
+                        │&nbsp;&nbsp;├── angry/ # 515 images (augmented)<br>
+                        │&nbsp;&nbsp;├── happy/ # 1,006 images (augmented)<br>
+                        │&nbsp;&nbsp;└── sad/ # 757 images (augmented)<br>
+                        ├── <span class="text-neonCyan">emotions.py</span> # Training script<br>
+                        ├── <span class="text-neonCyan">detect_emotion.py</span> # Inference script<br>
+                        ├── sad_happy_angry.pth # Trained model (~4.8 MB)<br>
+                        ├── crying.png, boy.png, person.png # Test images<br>
+                        └── README.md # Documentation
+                    </div>
+
+                    <p class="mt-3 text-xs text-gray-400">
+                        Dataset shows a noticeable class imbalance with <span
+                            class="text-neonYellow font-semibold">happy</span> having nearly twice as many samples as
+                        <span class="text-neonYellow font-semibold">angry</span>, which can bias the model toward
+                        positive predictions.
+                    </p>
+                </section>
+            </div>
+
+            <!-- Right column: Architecture summary -->
+            <aside class="space-y-6">
+
+                <!-- Architecture card -->
+                <section class="relative rounded-2xl border border-neonPink/40 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonPink text-xl">🏗️</span>
+                            CNN Architecture
+                        </h2>
+                        <span class="text-[10px] uppercase tracking-wide text-gray-400">EmotionCNN</span>
+                    </header>
+
+                    <ol class="text-xs text-gray-200 space-y-1.5 font-mono">
+                        <li>1. Input: <span class="text-neonYellow">1 × 48 × 48</span> grayscale</li>
+                        <li>2. Conv2D 1→32, 3×3 + ReLU + MaxPool 2×2 → <span class="text-neonCyan">[32, 24, 24]</span>
+                        </li>
+                        <li>3. Conv2D 32→64, 3×3 + ReLU + MaxPool 2×2 → <span class="text-neonCyan">[64, 12, 12]</span>
+                        </li>
+                        <li>4. Flatten → <span class="text-neonYellow">9,216</span></li>
+                        <li>5. FC 9,216 → 128 + ReLU</li>
+                        <li>6. FC 128 → 3 (angry, happy, sad)</li>
+                    </ol>
+
+                    <div class="mt-3 grid grid-cols-2 gap-2 text-[11px] text-gray-300">
+                        <div class="rounded-lg border border-neonCyan/40 bg-black/70 px-2.5 py-2">
+                            <div class="text-[10px] uppercase tracking-wide text-gray-400">Params</div>
+                            <div class="font-mono text-neonCyan mt-1">≈ 1.18M</div>
+                            <p class="mt-1 text-[11px] text-gray-400">Compact enough for real‑time CPU inference.</p>
+                        </div>
+                        <div class="rounded-lg border border-neonPurple/40 bg-black/70 px-2.5 py-2">
+                            <div class="text-[10px] uppercase tracking-wide text-gray-400">Training</div>
+                            <p class="mt-1 font-mono text-neonPurple">Adam, lr=0.001<br>Batch=32, Epochs=10</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Training config -->
+                <section class="relative rounded-2xl border border-neonCyan/40 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonCyan text-xl">⚙️</span>
+                            Training Setup
+                        </h2>
+                        <span class="text-[10px] uppercase tracking-wide text-gray-400">Preprocessing</span>
+                    </header>
+
+                    <p class="text-xs text-gray-300">
+                        Images are converted to 1‑channel grayscale, resized to 48×48, transformed to tensors, and
+                        normalized to roughly
+                        <span class="text-neonYellow">[−1, 1]</span> using mean 0.5 and std 0.5.
+                    </p>
+
+                    <div
+                        class="mt-3 font-mono text-[11px] leading-relaxed bg-black/70 rounded-xl border border-gray-700/60 px-3 py-2 overflow-auto">
+                        transforms.Compose([<br>
+                        &nbsp;&nbsp;Grayscale(1),<br>
+                        &nbsp;&nbsp;Resize(48×48),<br>
+                        &nbsp;&nbsp;ToTensor(),<br>
+                        &nbsp;&nbsp;Normalize(mean=0.5, std=0.5)<br>
+                        ])
+                    </div>
+
+                    <ul class="mt-3 text-xs text-gray-300 space-y-1.5">
+                        <li>• Optimizer: <span class="text-neonCyan">Adam (lr = 0.001)</span></li>
+                        <li>• Loss: <span class="text-neonCyan">CrossEntropyLoss</span></li>
+                        <li>• Device: <span class="text-neonYellow">CUDA if available</span>, otherwise CPU</li>
+                        <li>• Data augmentation: brightness & rotation variants embedded in dataset.</li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+
+        <!-- Issues & Recommendations -->
+        <section class="grid gap-6 lg:grid-cols-2">
+            <!-- Strengths / Issues -->
+            <div class="space-y-6">
+
+                <!-- Strengths -->
+                <div class="rounded-2xl border border-neonCyan/40 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonCyan text-xl">✅</span>
+                            Strengths
+                        </h2>
+                    </header>
+                    <ul class="text-sm text-gray-300 space-y-1.5">
+                        <li>• Compact, easy‑to‑understand CNN architecture ideal for learning and quick prototypes.</li>
+                        <li>• Augmented dataset (brightness/rotation) improves robustness to lighting and pose
+                            variations.</li>
+                        <li>• Clear separation between training (<span
+                                class="font-mono text-neonCyan">emotions.py</span>) and inference (<span
+                                class="font-mono text-neonCyan">detect_emotion.py</span>).</li>
+                        <li>• Small model file (~4.8&nbsp;MB) simplifies sharing and deployment.</li>
+                        <li>• Normalized inputs and simple preprocessing pipeline keep training stable.</li>
+                    </ul>
+                </div>
+
+                <!-- Issues -->
+                <div class="rounded-2xl border border-neonPink/40 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonPink text-xl">⚠️</span>
+                            Issues & Limitations
+                        </h2>
+                    </header>
+                    <ul class="text-sm text-gray-300 space-y-1.5">
+                        <li>• <span class="text-neonPink font-semibold">Class imbalance</span>: “happy” has roughly 2×
+                            more samples than “angry”, biasing predictions.</li>
+                        <li>• No explicit validation split or tracking of metrics (accuracy, precision, recall, F1,
+                            confusion matrix).</li>
+                        <li>• Fixed 10‑epoch training without early stopping or checkpointing of the best model.</li>
+                        <li>• Potential filename mismatch between saved model and loaded model in scripts.</li>
+                        <li>• Global image inversion during inference may harm performance on some images.</li>
+                        <li>• Limited error handling and no visual diagnostics (loss curves, sample predictions).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recommendations & Use cases -->
+            <div class="space-y-6">
+                <!-- Recommendations -->
+                <div class="rounded-2xl border border-neonYellow/50 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonYellow text-xl">🎯</span>
+                            Recommended Upgrades
+                        </h2>
+                    </header>
+
+                    <div class="text-sm text-gray-200 space-y-2">
+                        <div>
+                            <h3 class="text-xs uppercase tracking-wide text-neonYellow mb-1">High Priority</h3>
+                            <ul class="space-y-1.5">
+                                <li>• Introduce a train/validation split and log metrics each epoch.</li>
+                                <li>• Use class‑weighted loss or resampling to correct imbalance.</li>
+                                <li>• Add confusion matrix, per‑class metrics, and learning‑curve plots.</li>
+                                <li>• Fix model filename consistency between training and inference scripts.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase tracking-wide text-neonCyan mb-1 mt-2">Medium Priority</h3>
+                            <ul class="space-y-1.5">
+                                <li>• Implement early stopping and model checkpointing based on validation loss.</li>
+                                <li>• Make inversion optional or data‑driven (e.g., CLI flag or heuristic).</li>
+                                <li>• Add basic try/except handling around file I/O and inference.</li>
+                                <li>• Extend to more emotion classes (surprise, fear, disgust, neutral).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase tracking-wide text-neonPurple mb-1 mt-2">Low Priority</h3>
+                            <ul class="space-y-1.5">
+                                <li>• Add on‑the‑fly data augmentation (RandomCrop, RandomHorizontalFlip, etc.).</li>
+                                <li>• Introduce batch normalization and dropout for better generalization.</li>
+                                <li>• Build a simple GUI or web interface and export the model to ONNX for deployment.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Use cases -->
+                <div class="rounded-2xl border border-neonCyan/40 bg-black/80 backdrop-blur-xl p-4 md:p-5">
+                    <header class="flex items-center justify-between mb-3">
+                        <h2 class="text-base font-semibold flex items-center gap-2">
+                            <span class="text-neonCyan text-xl">🚀</span>
+                            Potential Use Cases
+                        </h2>
+                    </header>
+                    <ul class="text-sm text-gray-300 space-y-1.5">
+                        <li>• Mental‑health or therapy tools that track coarse emotional trends over time.</li>
+                        <li>• Customer‑service dashboards that visualize customer sentiment from video feeds.</li>
+                        <li>• Classroom monitoring to infer student engagement in online sessions.</li>
+                        <li>• Games that adapt difficulty or narrative based on the player’s facial expressions.</li>
+                        <li>• A/B testing of marketing content via emotional reactions to creatives.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer summary -->
+        <footer class="mt-2 text-xs text-gray-500">
+            This CNN‑based emotion detector is a solid educational prototype with clear code structure and reasonable
+            performance expectations.
+            With validation, stronger regularization, and richer metrics, it can evolve into a more robust experimental
+            platform.
+        </footer>
+    </div>
+</body>
+
+</html>
